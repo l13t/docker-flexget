@@ -34,6 +34,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Get latest release of Flexget
+        uses: rez0n/actions-github-release@main
+        id: flexget_release
+        env:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: "Flexget/Flexget"
+          type: "stable"
+
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
@@ -59,5 +67,8 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.flexget_release.outputs.release }},${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            FLEXGET_VERSION=${{ steps.flexget_release.outputs.release }}
