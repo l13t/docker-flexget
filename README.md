@@ -8,4 +8,4 @@ Before starting the container, you need to prepare your configuration files in a
 
 More detailed information on how to configure Flexget you could find at the following [https://flexget.com/Configuration](link).
 
-Flexget runs with UID=900 and GID=900. The folder with files should have write permissions for this user.
+Flexget runs with UID=1001 and GID=1001. The folder with files should have write permissions for this user.
