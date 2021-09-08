@@ -13,5 +13,3 @@ RUN pip install -U pip && \
 USER flexget
 
 WORKDIR /flexget
-
-ENTRYPOINT [ "flexget", "daemon", "start" ]
