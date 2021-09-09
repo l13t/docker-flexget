@@ -1,4 +1,5 @@
 ARG PYTHON_VERSION=3.9.6
+#FROM python:${PYTHON_VERSION}-alpine
 FROM python:${PYTHON_VERSION}
 
 ARG FLEXGET_VERSION=3.1.135
@@ -13,3 +14,5 @@ RUN pip install -U pip && \
 USER flexget
 
 WORKDIR /flexget
+
+ENTRYPOINT [ "flexget", "daemon", "start" ]
