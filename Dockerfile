@@ -11,8 +11,11 @@ RUN pip install -U pip && \
     mkdir -p /flexget/.flexget && \
     chown -R 1001:1001 /flexget
 
+COPY init.sh /init.sh
+RUN chmod +x /init.sh
+
 USER flexget
 
 WORKDIR /flexget
 
-ENTRYPOINT [ "flexget", "daemon", "start" ]
+ENTRYPOINT [ "/init.sh" ]
