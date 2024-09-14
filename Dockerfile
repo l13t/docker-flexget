@@ -1,11 +1,11 @@
-ARG PYTHON_VERSION=3.9.6
+ARG PYTHON_VERSION=3.12.6
 #FROM python:${PYTHON_VERSION}-alpine
 FROM python:${PYTHON_VERSION}
 
-ARG FLEXGET_VERSION=3.1.135
+ARG FLEXGET_VERSION
 
 RUN pip install -U pip && \
-    pip install FlexGet==$FLEXGET_VERSION && \
+    pip install FlexGet==${FLEXGET_VERSION} && \
     groupadd -g 1001 -r flexget && \
     useradd -m -u 1001 -d /flexget -s $(which nologin) -g flexget flexget && \
     mkdir -p /flexget/.flexget && \
